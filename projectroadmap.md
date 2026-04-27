@@ -9,9 +9,9 @@
 
 ## Sprint 2
 Centralized Profiles
-- [ ] Add a way to input names for friends and family.
-- [ ] Make sure birthdays and gifts are linked to the correct profile.
-- [ ] Be able to look up someone's profile by name.
+- [x] Add a way to input names for friends and family.
+- [x] Make sure birthdays and gifts are linked to the correct profile.
+- [x] Be able to look up someone's profile by name.
 
 Date Tracking
 - [ ] Add a log for personal dates (birthdays, anniversaries, etc.).
