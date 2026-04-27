@@ -17,9 +17,9 @@ Date Tracking
 - [x] Add a log for personal dates (birthdays, anniversaries, etc.).
 - [ ] Set the system to auto-populate major holidays.
 
-Advanced Alerts
-- [ ] Create a reminder that prints a "1-week warning" for upcoming dates.
-- [ ] Add a "day-of" reminder for events.
+Alerts
+- [x] Create a reminder that prints a "1-week warning" for upcoming dates.
+- [x] Add a "day-of" reminder for events.
 
 Gift Log
 - [x] Save and update gift ideas for specific people.
