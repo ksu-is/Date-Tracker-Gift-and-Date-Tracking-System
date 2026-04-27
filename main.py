@@ -6,13 +6,11 @@ dates = []
 gifts = []
 events = []
 
-
-
 # save information for future use
 def save_data():
     with open('profile_database.csv', 'w', newline='') as file:
         writer = csv.writer(file)
-        for row in zip(names, dates, gifts, events):
+        for row in zip(names, dates, events, gifts):
             writer.writerow(row)
 
 # pull data
@@ -36,9 +34,11 @@ while running:
     print("1. Add New Profile")
     print("2. Search Profile")
     print("3. Add/Update Gift Ideas")
-    print("4. Exit")
+    print("4. Update Name")
+    print("5. Delete Profile")
+    print("6. Exit")
 
-    user_select = input("Select Option (1-4): ")
+    user_select = input("Select Option (1-6): ")
 
     if user_select == "1":
         
@@ -60,16 +60,16 @@ while running:
         search = input("Enter Name: ")
         if search in names:
             n = names.index(search)
-            print("*** Profile Found ***")
+            print("**** PROFILE FOUND ****")
             print("Name: " + names[n])
             print("Date: " + dates[n])
             print("Event: " + events [n])
             print("Gifts: " + gifts [n])
         else:
-            print("Profile Not Found.")
+            print("PROFILE NOT FOUND.")
 
     elif user_select == "3":
-        search = input("Whose gift is this for? ")
+        search = input("Who is this gift for? ")
         if search in names:
             n = names.index(search)
             print("Gift Ideas: " + gifts[n])
@@ -78,9 +78,39 @@ while running:
             save_data()
             print("Gifts Updated.")
         else:
-            print("Profile Not Found.")
+            print("PROFILE NOT FOUND.")
         
-
     elif user_select == "4":
-        print("Exiting.")
+        search = input("Name being updated: ")
+        if search in names:
+            n = names.index(search)
+            new_name = input("Enter updated name: ")
+            names[n] = new_name
+            save_data()
+            print("Name Updated.")
+        else:
+            print("PROFILE NOT FOUND")
+
+    elif user_select == "5":
+        search = input("Name of the profile to DELETE: ")
+        if search in names:
+            n = names.index(search)
+            
+            confirm = input("Are you sure you want to delete " + names[n] + "? (yes/no): ")
+            
+            if confirm.lower() == "yes":
+                names.pop(n)
+                dates.pop(n)
+                gifts.pop(n)
+                events.pop(n)
+                
+                save_data() 
+                print("PROFILE DELETED.")
+            else:
+                print("DELETE CANCELED.")
+        else:
+            print("PROFILE NOT FOUND.")        
+
+    elif user_select == "6":
+        print("EXITING.")
         running = False
