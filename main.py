@@ -1,20 +1,22 @@
+# Holds previous data input from the user to read and write
 import csv
+# Datetime tool used to create alerts for upcoming events
 from datetime import datetime, timedelta
 
-# Create Lists
+# Create lists
 names = []
 dates = []
 gifts = []
 events = []
 
-# Save information for future use
+# Saves information in CSV filefor future use
 def save_data():
     with open('profile_database.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         for row in zip(names, dates, events, gifts):
             writer.writerow(row)
 
-# Pull data
+# Pull data from the CSV file
 def data_pull():
     try:
         with open('profile_database.csv', 'r') as file:
@@ -25,11 +27,11 @@ def data_pull():
                 events.append(row[2])
                 gifts.append(row[3])
     except FileNotFoundError:
-        pass
+        pass # If no file start with blank 
 
 # Setup alter notice
 def date_warning():
-    # additional date gets rid of time
+    # Additional date gets rid of time (hours/min)
     today = datetime.now().date()
     print("Checking Upcoming Events >>>>>>>")
     
@@ -37,18 +39,21 @@ def date_warning():
         this_year = today.year
         date_str = dates[d] + "/" + str(this_year)
         try:
-            # additional date gets rid of time
+            # Converts string into calendar date
             event_date = datetime.strptime(date_str, "%m/%d/%Y").date()
             
+            # Subtracts today from event date to see the difference
             time_diff = event_date - today
             days_left = time_diff.days
             
+            # Triggers an alert if it is day of event
             if days_left == 0:
                 print("TODAY: " + names[d] + " has a " + events[d] + "!")
+            #Trigger alert if it is within 1-7 days of event
             elif 0 < days_left <= 7:
                 print("REMINDER: " + names[d] + "'s " + events[d] + " is in " + str(days_left) + " days.")
         except:
-            pass 
+            pass # Skips dates with incorrect format
 
 data_pull()
 
@@ -70,7 +75,7 @@ while running:
     if user_select == "1":
         
         # Ask user for input
-        name_input = input("Enter Full Name: ")
+        name_input = input("Enter Full Name: ").title()
         date_input = input("Enter Date (MM/DD): ")
         event_input = input("Type (Birthday/Anniversary/One-Time): ")
         gift_input = input("Enter Gift: ")
