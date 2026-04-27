@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime, timedelta
 
 # Create Lists
 names = []
@@ -6,14 +7,14 @@ dates = []
 gifts = []
 events = []
 
-# save information for future use
+# Save information for future use
 def save_data():
     with open('profile_database.csv', 'w', newline='') as file:
         writer = csv.writer(file)
         for row in zip(names, dates, events, gifts):
             writer.writerow(row)
 
-# pull data
+# Pull data
 def data_pull():
     try:
         with open('profile_database.csv', 'r') as file:
@@ -26,11 +27,37 @@ def data_pull():
     except FileNotFoundError:
         pass
 
+# Setup alter notice
+def date_warning():
+    # additional date gets rid of time
+    today = datetime.now().date()
+    print("Checking Upcoming Events >>>>>>>")
+    
+    for d in range(len(dates)):
+        this_year = today.year
+        date_str = dates[d] + "/" + str(this_year)
+        try:
+            # additional date gets rid of time
+            event_date = datetime.strptime(date_str, "%m/%d/%Y").date()
+            
+            time_diff = event_date - today
+            days_left = time_diff.days
+            
+            if days_left == 0:
+                print("TODAY: " + names[d] + " has a " + events[d] + "!")
+            elif 0 < days_left <= 7:
+                print("REMINDER: " + names[d] + "'s " + events[d] + " is in " + str(days_left) + " days.")
+        except:
+            pass 
+
 data_pull()
+
+date_warning()
+
 running = True
 
 while running:
-    print("Date and Gift Tracker")
+    print("Date and Gift Tracker >>>>>>>")
     print("1. Add New Profile")
     print("2. Search Profile")
     print("3. Add/Update Gift Ideas")
