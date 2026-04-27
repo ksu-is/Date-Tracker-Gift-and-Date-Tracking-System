@@ -84,7 +84,7 @@ while running:
         print("New Profile Saved.")
 
     elif user_select == "2":
-        search = input("Enter Name: ")
+        search = input("Enter Name: ").title()
         if search in names:
             n = names.index(search)
             print("**** PROFILE FOUND ****")
@@ -96,7 +96,7 @@ while running:
             print("PROFILE NOT FOUND.")
 
     elif user_select == "3":
-        search = input("Who is this gift for? ")
+        search = input("Who is this gift for? ").title()
         if search in names:
             n = names.index(search)
             print("Gift Ideas: " + gifts[n])
@@ -108,7 +108,7 @@ while running:
             print("PROFILE NOT FOUND.")
         
     elif user_select == "4":
-        search = input("Name being updated: ")
+        search = input("Name being updated: ").title()
         if search in names:
             n = names.index(search)
             new_name = input("Enter updated name: ")
@@ -119,7 +119,7 @@ while running:
             print("PROFILE NOT FOUND")
 
     elif user_select == "5":
-        search = input("Name of the profile to DELETE: ")
+        search = input("Name of the profile to DELETE: ").title()
         if search in names:
             n = names.index(search)
             
